@@ -16,14 +16,34 @@
 #endif
 
 using namespace std;
-
+/**  This class is the master class in which all other
+ *   classes will be created.
+ * */
 class roomclass;
+/**  This class is a masterclass for all objects to be
+ *   created inside roomclass.
+ *   It contains general attributes for relative position.
+ */
 class roomobjectclass;
+/**  This class implementens all the roomba sensors and
+ *   contains the functions to trigger the sensors.
+ */
 class sensorclass;
+/**  This class will be responsible for triggering
+ *   roomba->drive() at a specified amount
+ */
 class timerclass;
 
+/**  This class is a subclass of roomobjectclass and
+ *   implements the roomba.
+ */
 class roombaclass;
+/** This class is a sublcass of roomobject class and
+ *  implements natural objects which appear inside a room.
+ */
 class wallclass;
+
+
 
 class roomclass{
 private:

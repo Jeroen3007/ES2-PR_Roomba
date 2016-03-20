@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/*****************************************************//*
+ * This is test code and as such won't be commented on
+ * any further.
+ *******************************************************/
+
 int main()
 {
 

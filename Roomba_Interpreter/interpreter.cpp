@@ -117,72 +117,81 @@ uint8_t interpreter::getWall()
 {
     sendTex.lock();
     uart->sendUart(roomba::wall);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getCliffLeft()
 {
     sendTex.lock();
     uart->sendUart(roomba::cliffLeft);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getCliffFrontLeft()
 {
     sendTex.lock();
     uart->sendUart(roomba::cliffFrontLeft);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getCliffFrontRight()
 {
     sendTex.lock();
     uart->sendUart(roomba::cliffFrontRight);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getCliffRight()
 {
     sendTex.lock();
     uart->sendUart(roomba::cliffRight);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getVirtualWall()
 {
     sendTex.lock();
     uart->sendUart(roomba::virtualWall);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 bool interpreter::getWheelOvercurrents()
 {
     sendTex.lock();
     uart->sendUart(roomba::wheelOvercurrents);
+    bool tmp = (uart->receiveUart() ? 1 : 0);
     sendTex.unlock();
-    return (uart->receiveUart() ? 1 : 0);
+    return tmp;
 }
 
 uint8_t interpreter::getDirtDetect()
 {
     sendTex.lock();
     uart->sendUart(roomba::dirtDetect);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getIrReceiver()
 {
     sendTex.lock();
     uart->sendUart(roomba::irReceiver);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 int16_t interpreter::getDistance()
@@ -212,8 +221,9 @@ uint8_t interpreter::getChargingState()
 {
     sendTex.lock();
     uart->sendUart(roomba::chargingState);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint16_t interpreter::getBatteryVoltage()
@@ -244,8 +254,9 @@ int8_t interpreter::getBatteryTemperature()
 {
     sendTex.lock();
     uart->sendUart(roomba::batteryTemperature);
+    int8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint16_t interpreter::getBatteryCharge()
@@ -336,32 +347,36 @@ uint8_t interpreter::getChargingSource()
 {
     sendTex.lock();
     uart->sendUart(roomba::chargingSource);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getOiMode()
 {
     sendTex.lock();
     uart->sendUart(roomba::oiMode);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getSongNumber()
 {
     sendTex.lock();
     uart->sendUart(roomba::songNumber);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 uint8_t interpreter::getSongPlaying()
 {
     sendTex.lock();
     uart->sendUart(roomba::songPlaying);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 int16_t interpreter::getRequestedVelocity()
@@ -436,12 +451,13 @@ uint16_t interpreter::getRightEncoderCount()
     return halfWord;
 }
 
-uint8_t interpreter::getLightBumper()
+bool interpreter::getLightBumper()
 {
     sendTex.lock();
     uart->sendUart(roomba::lightBumper);
+    bool tmp = (uart->receiveUart() ? 1 : 0);
     sendTex.unlock();
-    return (uart->receiveUart() ? 1 : 0);
+    return tmp;
 }
 
 uint16_t interpreter::getLightBumpLeftSignal()
@@ -568,8 +584,9 @@ uint8_t interpreter::getStatis()
 {
     sendTex.lock();
     uart->sendUart(roomba::statis);
+    uint8_t tmp = uart->receiveUart();
     sendTex.unlock();
-    return uart->receiveUart();
+    return tmp;
 }
 
 
@@ -578,64 +595,72 @@ bool interpreter::getBumpRight()
 {
     sendTex.lock();
     uart->sendUart(roomba::bumpAndWheel);
+    bool tmp = (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getBumpLeft()
 {
     sendTex.lock();
     uart->sendUart(roomba::bumpAndWheel);
+    bool tmp = (uart->receiveUart() & 0b00000010) == 0b00000010 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00000010) == 0b00000010 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getWheelDropRight()
 {
     sendTex.lock();
     uart->sendUart(roomba::bumpAndWheel);
+    bool tmp = (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getWheelDropLeft()
 {
     sendTex.lock();
     uart->sendUart(roomba::bumpAndWheel);
+    bool tmp = (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getSideBrushOvercurrent()
 {
     sendTex.lock();
     uart->sendUart(roomba::wheelOvercurrents);
+    bool tmp = (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getMainBrushOvercurrent()
 {
     sendTex.lock();
     uart->sendUart(roomba::wheelOvercurrents);
+    bool tmp = (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getRightWheelOvercurrent()
 {
     sendTex.lock();
     uart->sendUart(roomba::wheelOvercurrents);
+    bool tmp = (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
+    return tmp;
 }
 
 bool interpreter::getLeftWheelOvercurrent()
 {
     sendTex.lock();
     uart->sendUart(roomba::wheelOvercurrents);
+    bool tmp = (uart->receiveUart() & 0b00010000) == 0b00010000 ? 1 : 0;
     sendTex.unlock();
-    return (uart->receiveUart() & 0b00010000) == 0b00010000 ? 1 : 0;
+    return tmp;
 
 }
 

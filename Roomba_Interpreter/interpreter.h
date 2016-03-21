@@ -58,7 +58,7 @@ public:
     int16_t getRequestedLeftVelocity();
     uint16_t getLeftEncoderCount();
     uint16_t getRightEncoderCount();
-    uint8_t getLightBumper();
+    bool getLightBumper();
     uint16_t getLightBumpLeftSignal();
     uint16_t getLightBumpFrontLeftSignal();
     uint16_t getLightBumpCenterLeftSignal();

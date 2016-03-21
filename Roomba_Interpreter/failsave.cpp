@@ -29,6 +29,8 @@ void failsave::checkCodes()
         Interpreter->lockMutex(); // lock mutex for send and receive
 
         /* check critical sensors and intervene if neccesary*/
+        using namespace roomba;
+
         if(Interpreter->getBumpAndWheel())uart->sendUart(Stop);
         if(Interpreter->getCliffLeftSignal() > 2048)uart->sendUart(Stop);
         if(Interpreter->getCliffFrontLeftSignal() > 2048)uart->sendUart(Stop);

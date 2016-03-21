@@ -2,8 +2,6 @@
 #define OPCODES_H
 #include <stdint.h>
 
-
-
 namespace roomba {
 
     static const uint8_t Start =                        128;

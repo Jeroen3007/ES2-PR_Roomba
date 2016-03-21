@@ -91,17 +91,16 @@ void interpreter::failSave()
 {
     sendTex.lock();
 
-    /* check critical sensors and intervene if neccesary*/
+    /* check critical sensors and intervene if neccesary */
     using namespace roomba;
 
-    /* omschrijven naar individuele pollings zonder functie aanroep ivm mutex) */
-    if(Interpreter->getBumpAndWheel())uart->sendUart(Stop);
-    if(Interpreter->getCliffLeftSignal() > 2048)uart->sendUart(Stop);
-    if(Interpreter->getCliffFrontLeftSignal() > 2048)uart->sendUart(Stop);
-    if(Interpreter->getCliffFrontRightSignal() > 2048)uart->sendUart(Stop);
-    if(Interpreter->getCliffRightSignal() > 2048)uart->sendUart(Stop);
-    if(Interpreter->getWheelOvercurrents())uart->sendUart(Stop);
-    if((Interpreter->getBatteryCapacity()/Interpreter->getBatteryCharge()*100) < 10)uart->sendUart(Stop);
+    if(uart->sendUart(bumpAndWheel))uart->sendUart(Stop);
+    if(uart->sendUart(cliffLeftSignal) > 2048)uart->sendUart(Stop);
+    if(uart->sendUart(cliffFrontLeftSignal()) > 2048)uart->sendUart(Stop);
+    if(uart->sendUart(cliffFrontRightSignal()) > 2048)uart->sendUart(Stop);
+    if(uart->sendUart(cliffRightSignal()) > 2048)uart->sendUart(Stop);
+    if(uart->sendUart(wheelOvercurrents()))uart->sendUart(Stop);
+    if((uart->sendUart(batteryCapacity())/uart->sendUart(batteryCharge())*100) < 10)uart->sendUart(Stop); // stop roomba when battery is under 10%
     sendTex.unlock();
 
     std::this_thread::sleep_for(interval);

@@ -16,5 +16,7 @@ int main(int argc, char *argv[])
 /*   - drive functie controleren        */
 /*   - individuele sensorfuncties       */
 /*   - evt liedje functie               */
+/*   - failsave and interpreter switch  */
+/*          functie                     */
 /*                                      */
 /****************************************/

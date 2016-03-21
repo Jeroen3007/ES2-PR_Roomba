@@ -103,7 +103,8 @@ void interpreter::failSave()
     if(Interpreter->getWheelOvercurrents())uart->sendUart(Stop);
     if((Interpreter->getBatteryCapacity()/Interpreter->getBatteryCharge()*100) < 10)uart->sendUart(Stop);
     sendTex.unlock();
-    usleep(500);
+
+    std::this_thread::sleep_for(interval);
 }
 
 bool interpreter::getBumpAndWheel()

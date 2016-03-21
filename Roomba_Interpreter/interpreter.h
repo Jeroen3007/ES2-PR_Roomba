@@ -5,10 +5,12 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <chrono>
 
 #include "opcodes.h"
 #include "./UART/uart.h"
 
+std::chrono::milliseconds interval(500);
 
 class interpreter
 {
@@ -89,6 +91,7 @@ private:
     Uart *uart;
 
     std::mutex sendTex;
+
 };
 
 #endif // INTERPRETER_H

@@ -21,7 +21,7 @@ private:
 
     bool stop;
 
-    interpreter Interpreter;
+    interpreter* Interpreter;
     Uart *uart;
 };
 

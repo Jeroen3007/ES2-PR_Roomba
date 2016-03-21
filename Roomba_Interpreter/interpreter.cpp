@@ -468,7 +468,7 @@ uint8_t interpreter::getStatis()
 
 
 /***********************************************************/
-bool interpreter::getBumpRight()
+/*bool interpreter::getBumpRight()
 {
 
     return (sensorWaarden[bumpAndWheel] & 0b00000001) == 0b00000001 ? 1 : 0;
@@ -507,7 +507,7 @@ bool interpreter::getRightWheelOvercurrent()
 bool interpreter::getLeftWheelOvercurrent()
 {
     return (sensorWaarden[wheelOvercurrents] & 0b00010000) == 0b00010000 ? 1 : 0;
-}
+}*/
 
 void interpreter::lockMutex()
 {

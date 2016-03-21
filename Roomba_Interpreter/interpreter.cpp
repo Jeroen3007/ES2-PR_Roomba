@@ -61,7 +61,7 @@ void interpreter::turnRoomba(int a)
         while(1)
         {
             currentAngle += getAngle();
-            if(currentAngle <= dynamic_cast<int16_t>(a))
+            if(currentAngle <= (uint16_t)a)
             {
                 uart->sendUart(roomba::Stop);
                 break;
@@ -78,7 +78,7 @@ void interpreter::turnRoomba(int a)
         while(1)
         {
             currentAngle += getAngle();
-            if(currentAngle >= dynamic_cast<int16_t>(a))
+            if(currentAngle >= (uint16_t)a)
             {
                 uart->sendUart(roomba::Stop);
                 break;

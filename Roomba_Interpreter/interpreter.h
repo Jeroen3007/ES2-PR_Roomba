@@ -10,6 +10,7 @@
 #include "failsave.h"
 #include "./UART/uart.h"
 
+class failsave;
 
 class interpreter
 {

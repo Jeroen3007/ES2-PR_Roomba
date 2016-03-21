@@ -11,3 +11,12 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+/****************************************/
+/*              TO DO:                  */
+/*   - turn functie correct maken       */
+/*   - drive functie controleren        */
+/*   - individuele sensorfuncties       */
+/*   - evt liedje functie               */
+/*                                      */
+/****************************************/

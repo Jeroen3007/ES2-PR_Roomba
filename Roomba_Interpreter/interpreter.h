@@ -7,10 +7,8 @@
 #include <mutex>
 
 #include "opcodes.h"
-#include "failsave.h"
 #include "./UART/uart.h"
 
-class failsave;
 
 class interpreter
 {
@@ -24,6 +22,8 @@ public:
 
     void drives(speed s); // speedgrades: slow, medium & fast
     void turnRoomba(int); // angle in degrees
+
+    void failSave();
 
     bool getBumpAndWheel();
     uint8_t getWall();
@@ -83,13 +83,9 @@ public:
     bool getLeftWheelOvercurrent();
     /*-------------------------------*/
 
-    void lockMutex();
-    void unlockMutex();
 
 private:
     std::array<uint16_t,58> sensorWaarden;
-
-    failsave *FailSave;
     Uart *uart;
 
     std::mutex sendTex;

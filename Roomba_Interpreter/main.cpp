@@ -12,11 +12,11 @@ int main(int argc, char *argv[])
 
 /****************************************/
 /*              TO DO:                  */
-/*   - turn functie correct maken       */
+/*   - turn functie casting             */
 /*   - drive functie controleren        */
-/*   - individuele sensorfuncties       */
 /*   - evt liedje functie               */
-/*   - failsave and interpreter switch  */
-/*          functie                     */
+/*   - 8 bits functies correct maken    */
+/*   - functies contoleren op juiste    */
+/*      waardes                         */
 /*                                      */
 /****************************************/

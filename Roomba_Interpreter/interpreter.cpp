@@ -49,7 +49,7 @@ void interpreter::turnRoomba(int a)
 {
     uart->sendUart(roomba::Stop);   // stop roomba
     void getAngle();                // reset angle
-    uint8_t currentAngle = 0;
+    int16_t currentAngle = 0;
     uart->sendUart(roomba::drive);
     if(a < 0) // counter clockwise
     {
@@ -61,7 +61,7 @@ void interpreter::turnRoomba(int a)
         while(1)
         {
             currentAngle += getAngle();
-            if(currentAngle <= a)
+            if(currentAngle <= dynamic_cast<int16_t>(a))
             {
                 uart->sendUart(roomba::Stop);
                 break;
@@ -78,7 +78,7 @@ void interpreter::turnRoomba(int a)
         while(1)
         {
             currentAngle += getAngle();
-            if(currentAngle >= a)
+            if(currentAngle >= dynamic_cast<int16_t>(a))
             {
                 uart->sendUart(roomba::Stop);
                 break;

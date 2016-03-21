@@ -36,7 +36,7 @@ void failsave::checkCodes()
         if(Interpreter->getCliffFrontLeftSignal() > 2048)uart->sendUart(Stop);
         if(Interpreter->getCliffFrontRightSignal() > 2048)uart->sendUart(Stop);
         if(Interpreter->getCliffRightSignal() > 2048)uart->sendUart(Stop);
-        //if(Interpreter->getLeftWheelOvercurrent())uart->sendUart(Stop);
+        if(Interpreter->getWheelOvercurrents())uart->sendUart(Stop);
         if((Interpreter->getBatteryCapacity()/Interpreter->getBatteryCharge()*100) < 10)uart->sendUart(Stop);
 
         Interpreter->unlockMutex(); // free mutex for standard procedure

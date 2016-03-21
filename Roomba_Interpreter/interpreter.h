@@ -19,13 +19,11 @@ public:
     ~interpreter();
 
     typedef enum{SLOW,CRUISE,FAST}speed;
-    typedef enum{RIGHT = -90, LEFT = 90}angles;
-
 
     void startRoomba();
 
     void drives(speed s); // speedgrades: slow, medium & fast
-    void turnRoomba(angles); // angle in degrees (-90 or 90)
+    void turnRoomba(int); // angle in degrees
 
     bool getBumpAndWheel();
     uint8_t getWall();

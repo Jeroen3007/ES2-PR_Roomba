@@ -45,29 +45,14 @@ void interpreter::drives(speed s)
     }
 }
 
-void interpreter::turnRoomba(angles a)
+void interpreter::turnRoomba(int a)
 {
-    uint8_t currentAngle = getAngle();
+    uart->sendUart(roomba::Stop);   // stop roomba
+    void getAngle();                // reset angle
+    uint8_t currentAngle = 0;
     uart->sendUart(roomba::drive);
-    switch (a) {
-    case RIGHT:
-        uart->sendUart(0x00); // Velocity high byte
-        uart->sendUart(0x00); // Velocity low  byte
-        uart->sendUart(0xFF); // Radius high byte
-        uart->sendUart(0xFF); // Radius low  byte
-
-        while(1)
-        {
-            currentAngle += getAngle();
-            if(currentAngle == RIGHT)
-            {
-                uart->sendUart(roomba::Stop);
-                break;
-            }
-        }
-
-        break;
-    case LEFT:
+    if(a < 0) // counter clockwise
+    {
         uart->sendUart(0x00); // Velocity high byte
         uart->sendUart(0x00); // Velocity low  byte
         uart->sendUart(0x00); // Radius high byte
@@ -76,17 +61,30 @@ void interpreter::turnRoomba(angles a)
         while(1)
         {
             currentAngle += getAngle();
-            if(currentAngle == LEFT)
+            if(currentAngle <= a)
             {
                 uart->sendUart(roomba::Stop);
                 break;
             }
         }
-
-        break;
     }
+    if(a > 0) // clockwise
+    {
+        uart->sendUart(0x00); // Velocity high byte
+        uart->sendUart(0x00); // Velocity low  byte
+        uart->sendUart(0xFF); // Radius high byte
+        uart->sendUart(0xFF); // Radius low  byte
 
-
+        while(1)
+        {
+            currentAngle += getAngle();
+            if(currentAngle >= a)
+            {
+                uart->sendUart(roomba::Stop);
+                break;
+            }
+        }
+    }
 }
 
 bool interpreter::getBumpAndWheel()
@@ -468,46 +466,53 @@ uint8_t interpreter::getStatis()
 
 
 /***********************************************************/
-/*bool interpreter::getBumpRight()
+bool interpreter::getBumpRight()
 {
-
-    return (sensorWaarden[bumpAndWheel] & 0b00000001) == 0b00000001 ? 1 : 0;
+    uart->sendUart(roomba::bumpAndWheel);
+    return (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
 }
 
 bool interpreter::getBumpLeft()
 {
-    return (sensorWaarden[bumpAndWheel] & 0b00000010) == 0b00000010 ? 1 : 0;
+    uart->sendUart(roomba::bumpAndWheel);
+    return (uart->receiveUart() & 0b00000010) == 0b00000010 ? 1 : 0;
 }
 
 bool interpreter::getWheelDropRight()
 {
-    return (sensorWaarden[bumpAndWheel] & 0b00000100) == 0b00000100 ? 1 : 0;
+    uart->sendUart(roomba::bumpAndWheel);
+    return (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
 }
 
 bool interpreter::getWheelDropLeft()
 {
-    return (sensorWaarden[bumpAndWheel] & 0b00001000) == 0b00001000 ? 1 : 0;
+    uart->sendUart(roomba::bumpAndWheel);
+    return (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
 }
 
 bool interpreter::getSideBrushOvercurrent()
 {
-    return (sensorWaarden[wheelOvercurrents] & 0b00000001) == 0b00000001 ? 1 : 0;
+    uart->sendUart(roomba::wheelOvercurrents);
+    return (uart->receiveUart() & 0b00000001) == 0b00000001 ? 1 : 0;
 }
 
 bool interpreter::getMainBrushOvercurrent()
 {
-    return (sensorWaarden[wheelOvercurrents] & 0b00000100) == 0b00000100 ? 1 : 0;
+    uart->sendUart(roomba::wheelOvercurrents);
+    return (uart->receiveUart() & 0b00000100) == 0b00000100 ? 1 : 0;
 }
 
 bool interpreter::getRightWheelOvercurrent()
 {
-    return (sensorWaarden[wheelOvercurrents] & 0b00001000) == 0b00001000 ? 1 : 0;
+    uart->sendUart(roomba::wheelOvercurrents);
+    return (uart->receiveUart() & 0b00001000) == 0b00001000 ? 1 : 0;
 }
 
 bool interpreter::getLeftWheelOvercurrent()
 {
-    return (sensorWaarden[wheelOvercurrents] & 0b00010000) == 0b00010000 ? 1 : 0;
-}*/
+    uart->sendUart(roomba::wheelOvercurrents);
+    return (uart->receiveUart() & 0b00010000) == 0b00010000 ? 1 : 0;
+}
 
 void interpreter::lockMutex()
 {

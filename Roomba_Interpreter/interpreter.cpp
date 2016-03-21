@@ -94,6 +94,7 @@ void interpreter::failSave()
     /* check critical sensors and intervene if neccesary*/
     using namespace roomba;
 
+    /* omschrijven naar individuele pollings zonder functie aanroep ivm mutex) */
     if(Interpreter->getBumpAndWheel())uart->sendUart(Stop);
     if(Interpreter->getCliffLeftSignal() > 2048)uart->sendUart(Stop);
     if(Interpreter->getCliffFrontLeftSignal() > 2048)uart->sendUart(Stop);

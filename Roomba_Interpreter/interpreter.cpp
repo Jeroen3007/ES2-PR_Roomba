@@ -48,7 +48,7 @@ void interpreter::drives(speed s)
 void interpreter::turnRoomba(int a)
 {
     uart->sendUart(roomba::Stop);   // stop roomba
-    void getAngle();                // reset angle
+    (void) getAngle();                // reset angle
     int16_t currentAngle = 0;
     uart->sendUart(roomba::drive);
     if(a < 0) // counter clockwise
